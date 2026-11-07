@@ -13,7 +13,9 @@ mkdir -p .gemini/skills
 cp -R /path/to/gemini-code-editor-skill/.gemini/skills/code-editor .gemini/skills/
 ```
 
-Start Gemini CLI in that project and ask it to explain a small, well-understood code path first. Then try a low-risk change with existing tests. Review the diff and run the project's normal checks yourself. Do not use a production repository or sensitive data for an initial trial.
+Replace `/path/to/gemini-code-editor-skill` with the local path where you cloned or downloaded this repository. Start Gemini CLI in the test project and ask it to explain a small, well-understood code path first. Then try a low-risk change with existing tests. Review the diff and run the project's normal checks yourself. Do not use a production repository or sensitive data for an initial trial.
+
+The skill instructs the agent to stay on the current branch by default and not create branches, open pull requests, publish, deploy, or submit work externally without explicit authorization. This is guidance, not a technical permission boundary; enforce permissions in your environment as needed.
 
 If Gemini CLI does not discover the skill, consult the documentation for the installed CLI version for supported skill discovery and reload behavior. Do not assume the skill grants access to tools, devices, credentials, or permissions that the environment has not provided.
 

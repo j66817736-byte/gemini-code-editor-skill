@@ -32,17 +32,22 @@ Understand the existing code before changing it. Trace the relevant data flow, e
    - Preserve required data, ordering, privacy, compatibility, and security checks.
    - Do not claim a performance improvement without evidence from the code or measurements.
 
-5. **Verify the change.**
+5. **Keep repository actions under user control.**
+   - Work on the current branch by default. Do not create or switch branches, open pull requests, publish releases, deploy, or submit changes externally unless the user explicitly authorizes that action.
+   - Before making a broad or potentially destructive change, explain the scope and ask for confirmation.
+   - Never treat permission to edit code as permission to publish, deploy, or contact third parties.
+
+6. **Verify the change.**
    - Add or update focused tests for the requested behavior and likely regressions.
    - Run relevant tests and checks available in the repository.
    - Review the complete diff for unintended edits, especially changed constants, configuration, and unrelated files.
    - If a check cannot be run, state that clearly and do not imply it passed.
 
-6. **Respect the target environment.**
+7. **Respect the target environment.**
    - For Android, work with the app’s actual architecture; do not treat Termux or an emulator as a substitute for the target app or device.
    - Verify offline, voice, accessibility, and device-specific behavior rather than assuming it works.
    - Consider CPU, memory, battery, and thermal impact; avoid unnecessary polling and background work.
 
-7. **Report clearly.**
+8. **Report clearly.**
    - Summarize what changed, why it is safe, and how the data-flow analysis informed it.
    - List the tests and checks actually run and any remaining limitations.
