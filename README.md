@@ -4,24 +4,32 @@ A small, reviewable Agent Skill proposal for Gemini CLI. It guides Gemini to und
 
 This skill is **not** a skill-creation skill, does not add executable tools or permissions, and does not change Gemini CLI itself. It relies on tools already available in the user's Gemini CLI environment. The project owner can test it in a separate project and decide whether to keep, revise, or remove it.
 
-## Try it locally
+## Try it without Android
 
-From the root of a project where Gemini CLI is installed, copy the skill folder into that project's workspace skills directory:
+You do **not** need an Android device or SDK to check whether Gemini CLI discovers and follows this skill on a small code-editing task. The included Python example uses only the standard library, so running its tests does not require network access, API keys, or third-party packages.
 
-```sh
-mkdir -p .gemini/skills
-cp -R /path/to/gemini-code-editor-skill/.gemini/skills/code-editor .gemini/skills/
-```
+1. Clone or download this repository into an environment where Gemini CLI is installed. Open this repository as the Gemini CLI workspace so it can discover `.gemini/skills/code-editor/SKILL.md`.
+2. Ask Gemini CLI to explain `examples/safe-edit/converter.py` and its tests without editing. Check whether it traces the code and identifies the conversion factor.
+3. Then ask it to add an inverse conversion function while preserving the existing conversion factor exactly and adding tests. Review the diff yourself.
+4. From the repository root, run:
 
-Replace `/path/to/gemini-code-editor-skill` with the local path where you cloned or downloaded this repository. Start Gemini CLI in the test project and ask it to explain a small, well-understood code path first. Then try a low-risk change with existing tests. Review the diff and run the project's normal checks yourself. Do not use a production repository or sensitive data for an initial trial.
+   ```sh
+   python -m unittest discover -s examples/safe-edit -p 'test_*.py' -v
+   ```
 
-The skill instructs the agent to stay on the current branch by default and not create branches, open pull requests, publish, deploy, or submit work externally without explicit authorization. This is guidance, not a technical permission boundary; enforce permissions in your environment as needed.
+5. Compare the output, tests, and diff with what you expected. Revert the example changes after the trial if you want to keep this repository unchanged.
 
-If Gemini CLI does not discover the skill, consult the documentation for the installed CLI version for supported skill discovery and reload behavior. Do not assume the skill grants access to tools, devices, credentials, or permissions that the environment has not provided.
+The local Python tests need no internet or API keys. **Gemini CLI itself still needs to be installed and authenticated** to use Gemini; this repository does not include credentials. Never put API keys, tokens, or passwords in the skill, example files, prompts committed to the repository, or Git history. Do not assume the Gemini mobile app or a phone browser loads CLI skills.
+
+If Gemini CLI is unavailable, you can still run the Python tests, but that only checks the sample code; it does not test skill discovery or Gemini's behavior. No Android app is built or tested by this example.
+
+## Try it on an Android project later
+
+Once you have access to that app's source code and a Gemini CLI environment, use a small, isolated change first. The skill can help inspect and edit code without an Android device, but validating builds, device compatibility, offline operation, voice input, accessibility, battery, or thermal behavior may require the project's Android build environment and/or a real device. Record exactly which checks you were able to run.
 
 ## Suggested trial report
 
-Record the Gemini CLI version, project/language, prompt, whether the skill was discovered, files changed, tests actually run and their results, any incorrect assumptions, and whether the skill's safeguards were followed. Share only information you are authorized to disclose.
+Record the Gemini CLI version, project/language, prompt, whether the skill was discovered, files changed, tests actually run and their results, any incorrect assumptions, and whether the skill's safeguards were followed. Share only information you are authorized to disclose; redact secrets and personal data.
 
 ## Status and attribution
 
