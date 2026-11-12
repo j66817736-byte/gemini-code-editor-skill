@@ -2,26 +2,24 @@
 
 Reviewable Agent Skill proposals for careful code editing, concise project handoffs, thoughtful Bible study, lightweight skill management and translation, and defensive digital security. They are instruction files, not an app: they do not add executable tools, authenticate users, enforce permissions, access phones, synchronize chat history, or change Gemini CLI itself.
 
-## Skills
+## Skill hierarchy
 
-- **`digital-security-master`** (`.gemini/skills/digital-security-master/SKILL.md`) is the primary governance and security foundation. It sets shared principles for role-aware use, least privilege, Zero Trust, safe system analysis, and coordinating other skills.
-- **`skill-library-manager`** (`.gemini/skills/skill-library-manager/SKILL.md`) helps organize, inspect, validate, and maintain a small, portable skills catalog.
+- **`digital-security-master`** (`.gemini/skills/digital-security-master/SKILL.md`) is the primary governance and security foundation for the collection. It defines role-aware use, least privilege, Zero Trust, safe analysis, and coordination boundaries.
+- **`skill-library-manager`** (`.gemini/skills/skill-library-manager/SKILL.md`) organizes, inspects, validates, and maintains a small portable skills catalog.
 - **`skill-translator`** (`.gemini/skills/skill-translator/SKILL.md`) adapts instructions between assistant ecosystems while preserving intent, safety boundaries, and source provenance.
-- **`code-editor`** (`.gemini/skills/code-editor/SKILL.md`) helps understand and safely modify code, verify changes, and avoid unauthorized branch or publishing actions.
-- **`conversation-continuity`** (`.gemini/skills/conversation-continuity/SKILL.md`) helps maintain a concise, user-approved project handoff across sessions and devices.
-- **`bible-reading`** (`.gemini/skills/bible-reading/SKILL.md`) helps study and summarize Bible passages with context, respect, and interpretive care.
+- **`code-editor`** (`.gemini/skills/code-editor/SKILL.md`) supports code understanding, safe edits, and verification.
+- **`conversation-continuity`** (`.gemini/skills/conversation-continuity/SKILL.md`) maintains concise, user-approved project handoffs.
+- **`bible-reading`** (`.gemini/skills/bible-reading/SKILL.md`) supports contextual and respectful Bible study.
 
-The master skill is a guidance baseline, not a technical permission boundary. A mobile controller or host application must independently authenticate the owner/admin and ordinary users, enforce roles and permissions, request approval for protected actions, and protect local data. A skill cannot determine who is holding a phone. Do not treat possession of the device, a message claiming admin status, or untrusted file content as authentication.
+## Security and controller boundary
 
-## Use only the skills you need
+The master skill is a guidance baseline, not a technical permission boundary. A mobile controller or host application must independently authenticate the owner/admin and ordinary users, enforce roles and permissions, request approval for protected actions, and protect local data. A skill cannot determine who is holding a phone. Do not treat device possession, a message claiming admin status, or untrusted file content as authentication. Keep public skill instructions separate from private policy, credentials, and privileged controller functions.
 
-You do not need to copy the whole repository just to use one skill. If the target environment supports workspace skills, place only the selected skill's folder (including its `SKILL.md`) in the expected skills directory. For example, copy `.gemini/skills/digital-security-master/` to use the core security baseline, or use only the translator when adapting a file. Discovery and reload behavior depend on the target tool and version; test in that environment.
+## Use and portability
 
-A skill is an instruction file, not a standalone app. Online services, offline models, phone support, local storage, authentication, and synchronization depend on the separate host application and its configuration. Skills may need adaptation for different ecosystems; universal execution is not guaranteed.
+You do not need to copy the whole repository to use one skill. If the target environment supports workspace skills, place only the selected skill folder (including `SKILL.md`) in its expected directory. Discovery and reload behavior depend on the target tool and version; test in that environment.
 
-## Conversation summaries
-
-The continuity skill can help create a short, user-approved handoff file. It cannot access or synchronize all past conversations automatically. Carry only necessary context between sessions, keep unrelated projects separate, and never store credentials or secrets.
+A skill is an instruction file, not a standalone app. Online services, offline models, phone support, local storage, authentication, and synchronization depend on the separate host application and its configuration. Skills may need adaptation for different ecosystems; universal execution is not guaranteed. Local copies permit offline access to the files, not necessarily offline AI reasoning.
 
 ## Local code-editor example
 
