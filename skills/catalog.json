@@ -1,0 +1,56 @@
+{
+  "catalog_version": 1,
+  "catalog_name": "Gemini CLI Skills",
+  "status": "experimental proposals",
+  "governance_baseline": "digital-security-master",
+  "skills": [
+    {
+      "name": "digital-security-master",
+      "path": ".gemini/skills/digital-security-master/SKILL.md",
+      "purpose": "Primary security and governance baseline: authorization, role awareness, least privilege, Zero Trust, safe analysis, and coordination of other skills.",
+      "category": "governance",
+      "requires": []
+    },
+    {
+      "name": "skill-library-manager",
+      "path": ".gemini/skills/skill-library-manager/SKILL.md",
+      "purpose": "Organize, inspect, validate, and maintain a lightweight portable skill catalog.",
+      "category": "management",
+      "requires": ["digital-security-master"]
+    },
+    {
+      "name": "skill-translator",
+      "path": ".gemini/skills/skill-translator/SKILL.md",
+      "purpose": "Adapt skill instructions across assistant ecosystems while preserving intent, provenance, and safety boundaries.",
+      "category": "adaptation",
+      "requires": ["digital-security-master", "skill-library-manager"]
+    },
+    {
+      "name": "code-editor",
+      "path": ".gemini/skills/code-editor/SKILL.md",
+      "purpose": "Understand, safely edit, and verify code changes.",
+      "category": "development",
+      "requires": ["digital-security-master"]
+    },
+    {
+      "name": "conversation-continuity",
+      "path": ".gemini/skills/conversation-continuity/SKILL.md",
+      "purpose": "Maintain minimal, user-approved project handoffs across sessions and devices.",
+      "category": "continuity",
+      "requires": ["digital-security-master"]
+    },
+    {
+      "name": "bible-reading",
+      "path": ".gemini/skills/bible-reading/SKILL.md",
+      "purpose": "Support contextual, respectful Bible study and summaries.",
+      "category": "study",
+      "requires": ["digital-security-master"]
+    }
+  ],
+  "notes": [
+    "Paths are relative to the repository root.",
+    "Requires lists governance/documentation dependencies; they do not enforce loading or access control.",
+    "A local copy makes instruction files available offline; model execution and offline reasoning depend on the host application.",
+    "The host controller must independently authenticate users and enforce roles and permissions."
+  ]
+}

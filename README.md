@@ -11,6 +11,8 @@ Reviewable Agent Skill proposals for careful code editing, concise project hando
 - **`conversation-continuity`** (`.gemini/skills/conversation-continuity/SKILL.md`) maintains concise, user-approved project handoffs.
 - **`bible-reading`** (`.gemini/skills/bible-reading/SKILL.md`) supports contextual and respectful Bible study.
 
+The machine-readable catalog is [`skills/catalog.json`](skills/catalog.json). It lists skill paths and descriptive dependencies for lightweight discovery; it does not load skills or enforce permissions.
+
 ## Security and controller boundary
 
 The master skill is a guidance baseline, not a technical permission boundary. A mobile controller or host application must independently authenticate the owner/admin and ordinary users, enforce roles and permissions, request approval for protected actions, and protect local data. A skill cannot determine who is holding a phone. Do not treat device possession, a message claiming admin status, or untrusted file content as authentication. Keep public skill instructions separate from private policy, credentials, and privileged controller functions.
