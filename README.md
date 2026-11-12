@@ -1,36 +1,32 @@
-# Gemini CLI Code Editor Skill (proposal)
+# Gemini CLI Code Editor Skills (proposals)
 
-A small, reviewable Agent Skill proposal for Gemini CLI. It guides Gemini to understand existing code and data flow before making focused changes, protect behavior-sensitive values (including decimals, units, and thresholds), run relevant checks, and report limitations honestly.
+Reviewable Agent Skill proposals for Gemini CLI. They guide the agent to understand existing code and data flow before focused changes, protect behavior-sensitive values, run relevant checks, preserve approved project context across sessions, and report limitations honestly.
 
-This skill is **not** a skill-creation skill, does not add executable tools or permissions, and does not change Gemini CLI itself. It relies on tools already available in the user's Gemini CLI environment. The project owner can test it in a separate project and decide whether to keep, revise, or remove it.
+These skills provide instructions only. They do not add executable tools, permissions, phone support, chat-history access, or synchronization, and they do not change Gemini CLI itself. They rely on tools available in the user's Gemini CLI environment. The project owner can review and test them before deciding whether to keep, revise, or submit them.
 
-## Try it without Android
+## Included skills
 
-You do **not** need an Android device or SDK to check whether Gemini CLI discovers and follows this skill on a small code-editing task. The included Python example uses only the standard library, so running its tests does not require network access, API keys, or third-party packages.
+- **`code-editor`** (`.gemini/skills/code-editor/SKILL.md`): understand and safely modify existing code, verify changes, and avoid unauthorized branch or publishing actions.
+- **`conversation-continuity`** (`.gemini/skills/conversation-continuity/SKILL.md`): maintain a concise, user-approved `PROJECT_CONTEXT.md` handoff to reduce repeated explanations across chats and devices.
 
-1. Clone or download this repository into an environment where Gemini CLI is installed. Open this repository as the Gemini CLI workspace so it can discover `.gemini/skills/code-editor/SKILL.md`.
-2. Ask Gemini CLI to explain `examples/safe-edit/converter.py` and its tests without editing. Check whether it traces the code and identifies the conversion factor.
-3. Then ask it to add an inverse conversion function while preserving the existing conversion factor exactly and adding tests. Review the diff yourself.
-4. From the repository root, run:
+## Phone and conversation continuity
 
-   ```sh
-   python -m unittest discover -s examples/safe-edit -p 'test_*.py' -v
-   ```
+The continuity skill does **not** automatically access or synchronize all conversations, and it does not install or run itself on a phone. It can help maintain a short handoff file that you choose to make available in the next session. A phone-centered workflow and syncing selected context across devices would require a compatible app or documented integration, user-granted access, and separate testing. Do not treat a repository stored in cloud storage as proof that chat history is synchronized or that the skills execute there.
 
-5. Compare the output, tests, and diff with what you expected. Revert the example changes after the trial if you want to keep this repository unchanged.
+Use separate context files for unrelated projects. Keep only necessary project notes, exclude secrets, and review content before sharing or publishing it. Offline availability depends on the storage app and its sync setup; cloud synchronization may require internet.
 
-The local Python tests need no internet or API keys. **Gemini CLI itself still needs to be installed and authenticated** to use Gemini; this repository does not include credentials. Never put API keys, tokens, or passwords in the skill, example files, prompts committed to the repository, or Git history. Do not assume the Gemini mobile app or a phone browser loads CLI skills.
+## Local code-editor example
 
-If Gemini CLI is unavailable, you can still run the Python tests, but that only checks the sample code; it does not test skill discovery or Gemini's behavior. No Android app is built or tested by this example.
+The included Python example uses only the standard library. Its tests can be run from the repository root with:
 
-## Try it on an Android project later
+```sh
+python -m unittest discover -s examples/safe-edit -p 'test_*.py' -v
+```
 
-Once you have access to that app's source code and a Gemini CLI environment, use a small, isolated change first. The skill can help inspect and edit code without an Android device, but validating builds, device compatibility, offline operation, voice input, accessibility, battery, or thermal behavior may require the project's Android build environment and/or a real device. Record exactly which checks you were able to run.
+This does not require network access, API keys, or third-party test packages. To test the skills themselves, use a compatible Gemini CLI installation, open this repository as its workspace, and verify skill discovery and behavior. Gemini CLI still requires its own installation and authentication. Do not put credentials in the repository. Do not assume the Gemini mobile app or a phone browser loads CLI skills.
 
-## Suggested trial report
-
-Record the Gemini CLI version, project/language, prompt, whether the skill was discovered, files changed, tests actually run and their results, any incorrect assumptions, and whether the skill's safeguards were followed. Share only information you are authorized to disclose; redact secrets and personal data.
+The sample test only checks the Python example; it does not test Gemini skill discovery, Android behavior, phone storage, or synchronization. No Android app has been built or tested here.
 
 ## Status and attribution
 
-This is an experimental proposal created from the project owner's ideas in collaboration with GitHub Copilot. It has not been submitted to or endorsed by Google, and it has not been tested in Gemini CLI in this environment. No changes have been made to Google's Gemini CLI repository. The project owner should review and test it before deciding whether or where to submit it.
+These are experimental proposals created from the project owner's ideas in collaboration with GitHub Copilot. They have not been submitted to or endorsed by Google, and they have not been tested in Gemini CLI in this environment. No changes have been made to Google's Gemini CLI repository. Review and test them before deciding whether or where to submit them.
