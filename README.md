@@ -1,10 +1,12 @@
 # Gemini CLI Skills (proposals)
 
-Reviewable Agent Skill proposals for careful code editing, concise project handoffs, thoughtful Bible study, and defensive digital security. They are instruction files, not an app: they do not add executable tools, authenticate users, enforce permissions, access phones, synchronize chat history, or change Gemini CLI itself.
+Reviewable Agent Skill proposals for careful code editing, concise project handoffs, thoughtful Bible study, lightweight skill management and translation, and defensive digital security. They are instruction files, not an app: they do not add executable tools, authenticate users, enforce permissions, access phones, synchronize chat history, or change Gemini CLI itself.
 
 ## Skills
 
 - **`digital-security-master`** (`.gemini/skills/digital-security-master/SKILL.md`) is the primary governance and security foundation. It sets shared principles for role-aware use, least privilege, Zero Trust, safe system analysis, and coordinating other skills.
+- **`skill-library-manager`** (`.gemini/skills/skill-library-manager/SKILL.md`) helps organize, inspect, validate, and maintain a small, portable skills catalog.
+- **`skill-translator`** (`.gemini/skills/skill-translator/SKILL.md`) adapts instructions between assistant ecosystems while preserving intent, safety boundaries, and source provenance.
 - **`code-editor`** (`.gemini/skills/code-editor/SKILL.md`) helps understand and safely modify code, verify changes, and avoid unauthorized branch or publishing actions.
 - **`conversation-continuity`** (`.gemini/skills/conversation-continuity/SKILL.md`) helps maintain a concise, user-approved project handoff across sessions and devices.
 - **`bible-reading`** (`.gemini/skills/bible-reading/SKILL.md`) helps study and summarize Bible passages with context, respect, and interpretive care.
@@ -13,7 +15,7 @@ The master skill is a guidance baseline, not a technical permission boundary. A 
 
 ## Use only the skills you need
 
-You do not need to copy the whole repository just to use one skill. If the target environment supports workspace skills, place only the selected skill's folder (including its `SKILL.md`) in the expected skills directory. For example, copy `.gemini/skills/digital-security-master/` to use the core security baseline. Discovery and reload behavior depend on the target tool and version; test in that environment.
+You do not need to copy the whole repository just to use one skill. If the target environment supports workspace skills, place only the selected skill's folder (including its `SKILL.md`) in the expected skills directory. For example, copy `.gemini/skills/digital-security-master/` to use the core security baseline, or use only the translator when adapting a file. Discovery and reload behavior depend on the target tool and version; test in that environment.
 
 A skill is an instruction file, not a standalone app. Online services, offline models, phone support, local storage, authentication, and synchronization depend on the separate host application and its configuration. Skills may need adaptation for different ecosystems; universal execution is not guaranteed.
 
