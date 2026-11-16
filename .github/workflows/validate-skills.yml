@@ -63,7 +63,7 @@ jobs:
               frontmatter = match.group(1)
               declared_name = re.search(r"^name:\s*([^\n]+)\s*$", frontmatter, re.M)
               description = re.search(r"^description:\s*(.+)\s*$", frontmatter, re.M)
-              if not declared_name or declared_name.group(1).strip().strip(" '""") != name:
+              if not declared_name or declared_name.group(1).strip() != name:
                   errors.append(f"{name}: frontmatter name does not match catalog")
               if not description or not description.group(1).strip():
                   errors.append(f"{name}: missing frontmatter description")
