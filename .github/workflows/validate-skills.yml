@@ -23,7 +23,7 @@ jobs:
           import re
           from pathlib import Path
 
-          root = Path(".")
+          root = Path(".").resolve()
           catalog_path = root / "skills/catalog.json"
           if not catalog_path.is_file():
               raise SystemExit("ERROR: skills/catalog.json is missing")
@@ -48,7 +48,7 @@ jobs:
                   errors.append(f"{name}: missing path")
                   continue
               path = (root / rel).resolve()
-              if root.resolve() not in path.parents:
+              if root not in path.parents:
                   errors.append(f"{name}: path escapes repository")
                   continue
               if not path.is_file():
@@ -56,14 +56,14 @@ jobs:
                   continue
 
               content = path.read_text(encoding="utf-8")
-              match = re.match(r"^---\\s*\\n(.*?)\\n---\\s*\\n", content, re.S)
+              match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.S)
               if not match:
                   errors.append(f"{name}: missing YAML frontmatter")
                   continue
               frontmatter = match.group(1)
-              declared_name = re.search(r"^name:\\s*([^\\n]+)\\s*$", frontmatter, re.M)
-              description = re.search(r"^description:\\s*(.+)\\s*$", frontmatter, re.M)
-              if not declared_name or declared_name.group(1).strip().strip("\\\"'") != name:
+              declared_name = re.search(r"^name:\s*([^\n]+)\s*$", frontmatter, re.M)
+              description = re.search(r"^description:\s*(.+)\s*$", frontmatter, re.M)
+              if not declared_name or declared_name.group(1).strip().strip(" '""") != name:
                   errors.append(f"{name}: frontmatter name does not match catalog")
               if not description or not description.group(1).strip():
                   errors.append(f"{name}: missing frontmatter description")
@@ -77,7 +77,7 @@ jobs:
                           errors.append(f"{name}: unknown dependency {dependency}")
 
           if errors:
-              print("\\n".join(f"- {error}" for error in errors))
+              print("\n".join(f"- {error}" for error in errors))
               raise SystemExit(1)
 
           print(f"Validated {len(skills)} skills: catalog paths, metadata, and dependencies are consistent.")
